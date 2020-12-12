@@ -30,6 +30,15 @@ jobs:
           context: ./packages/first-server
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/first-server:latest
+
+      - name: Build and Push Second Server
+        id: docker_build
+        uses: docker/build-push-action@v2
+        with:
+          context: ./packages/second-server
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/second-server:latest
+
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
 
